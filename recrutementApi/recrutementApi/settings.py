@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'rest_framework'
+    'rest_framework',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,10 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
 WSGI_APPLICATION = 'recrutementApi.wsgi.application'
 
 
@@ -77,8 +82,12 @@ WSGI_APPLICATION = 'recrutementApi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'recrutement',
+        'USER': 'ton_username',
+        'PASSWORD': 'ton_mot_de_passe',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
