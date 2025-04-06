@@ -1,36 +1,46 @@
 # Recrutement-Api
 
-# Installation du projet
+## 1. Clonage du projet
 
-1) Clonage du projet
+```bash
+git clone https://github.com/Karim-Bouqsi/Recrutement-Api
+cd Recrutement-Api/
+```
 
-```git clone https://github.com/Karim-Bouqsi/Recrutement-Api```
-```cd Recrutement-Api/```
+## 2. Installation des dépendances
 
-2) Installations de l'environnement
+```bash
+pip install -r requirements.txt
+```
 
-``` pip install -r requirements.txt ```
+## 3. Création de la base de données
 
-3) Créer la base de donnée
+### Linux :
 
-# Linux : 
+```bash
+sudo apt install postgresql postgresql-contrib
+sudo -u postgres psql
+```
 
-```sudo apt install postgresql postgresql-contrib```
-```sudo -u postgres psql```
+Dans le shell Postgres :
+```sql
+CREATE DATABASE recrutement;
+\q
+```
 
-```CREATE DATABASE recrutement;```
-```\q```
+### Windows :
 
-# Windows : 
+1. Télécharger PostgreSQL : [https://www.enterprisedb.com/downloads/postgres-postgresql-downloads](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+2. Ouvrir SQL Shell (psql) et taper :
+```sql
+CREATE DATABASE recrutement;
+```
 
-Installer postgres si ce n'est pas déjà fait : https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
-Après l'installation, lancer le logiciel SQL Shell et tapez la commande :
-```CREATE DATABASE recrutement;```
+## 4. Modifier le fichier `settings.py`
 
-4) Modification du fichier settings.py
+Changer la configuration `DATABASES` :
 
-Modifier la variable DATABASES pour mettre votre nom d'utilisateur (postgres par defaut) et votre mot de passe choisi lors de l'installation de postgres.
-
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -41,76 +51,74 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+```
 
-5) Lancer le code
+## 5. Lancer le serveur
 
-Sur le terminal, tapez ces commandes : 
-    - ```cd recrutementApi```
-    - ```python manage.py makemigrations```
-    - ```python manage.py migrate```
-    - ```python manage.py runserver```
+```bash
+cd recrutementApi
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
 
-Puis accèder à l'api via l'url : `http://127.0.0.1:8000/api`
+Accéder à l'API : [http://127.0.0.1:8000/api](http://127.0.0.1:8000/api)
 
+---
 
-6) Guide d'utilisations de l'api
+## 6. Documentation Swagger
 
-Accéder à cette url pour connaitre les différents endpoints disponibles : `http://127.0.0.1:8000/api/schema/swagger-ui/`
+[http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1:8000/api/schema/swagger-ui/)
 
-7) Les enpoints
- 
-# Candidats
+---
 
-`/api/candidats/` -> `http://127.0.0.1:8000/api/candidats/`
-    - GET : Liste tous les candidats
-    - POST : Créer un nouveau candidat
+## 7. Liste des Endpoints
 
-`/api/candidats/<id>/` -> `http://127.0.0.1:8000/api/candidats/{id}`
-    - GET : Voir les infos d’un candidat spécifique
-    - PUT : Modifier complètement les infos d’un candidat
-    - PATCH : Modifier partiellement un candidat
-    - DELETE : Supprimer un candidat
+### 🔹 Candidats
 
-# Recruteurs
+- `http://127.0.0.1:8000/api/candidats/{id}/`
 
-`/api/recruteurs/` -> `http://127.0.0.1:8000/api/recruteurs/`
-    - GET : Liste tous les recruteurs
-    - POST : Créer un nouveau recruteur
+- `GET /api/candidats/` : Liste des candidats
+- `POST /api/candidats/` : Créer un candidat
+- `GET /api/candidats/{id}` : Détails d’un candidat
+- `PUT /api/candidats/{id}` : Modifier complètement un candidat
+- `PATCH /api/candidats/{id}` : Modifier partiellement un candidat
+- `DELETE /api/candidats/{id}` : Supprimer un candidat
 
-`/api/recruteurs/<id>/` -> `http://127.0.0.1:8000/api/recruteurs/{id}`
-    - GET : Voir les infos d’un recruteur spécifique
-    - PUT : Modifier complètement les infos d’un recruteur
-    - PATCH : Modifier partiellement un recruteur
-    - DELETE : Supprimer un recruteur
+### 🔹 Recruteurs
 
-# Offres 
+- `http://127.0.0.1:8000/api/recruteurs/{id}/`
 
-`/api/offres/` -> `http://127.0.0.1:8000/api/offres/`
-    - GET : Liste toutes les offres
-    - POST : Créer une nouvelle offre
+- `GET /api/recruteurs/` : Liste des recruteurs
+- `POST /api/recruteurs/` : Créer un recruteur
+- `GET /api/recruteurs/{id}` : Détails d’un recruteur
+- `PUT /api/recruteurs/{id}` : Modifier complètement un recruteur
+- `PATCH /api/recruteurs/{id}` : Modifier partiellement un recruteur
+- `DELETE /api/recruteurs/{id}` : Supprimer un recruteur
 
-`/api/offres/<id>/` -> `http://127.0.0.1:8000/api/offres/{id}`
-    - GET : Voir les infos d’une offre spécifique
-    - PUT : Modifier complètement les infos d’une offre
-    - PATCH : Modifier partiellement une offre
-    - DELETE : Supprimer une offre
+### 🔹 Offres
 
-# Candidature
+- `http://127.0.0.1:8000/api/offres/{id}/`
 
-`/api/candidatures/` -> `http://127.0.0.1:8000/api/candidatures/`
-    - GET : Liste toutes les candidatures
-    - POST : Créer une nouvelle candidature
+- `GET /api/offres/` : Liste des offres
+- `POST /api/offres/` : Créer une offre
+- `GET /api/offres/{id}` : Détails d’une offre
+- `PUT /api/offres/{id}` : Modifier complètement une offre
+- `PATCH /api/offres/{id}` : Modifier partiellement une offre
+- `DELETE /api/offres/{id}` : Supprimer une offre
 
-`/api/candidatures/<id>/` -> `http://127.0.0.1:8000/api/candidatures/{id}`
-    - GET : Voir les infos d’une candidature spécifique
-    - PUT : Modifier complètement les infos d’une candidature
-    - PATCH : Modifier partiellement une candidature
-    - DELETE : Supprimer une candidature
+### 🔹 Candidatures
 
-# Documentations
+- `http://127.0.0.1:8000/api/candidatures/{id}/`
 
-`/api/schema/` -> `http://127.0.0.1:8000/api/schema/`
-    - GET : Installation du schéma OpenAI
+- `GET /api/candidatures/` : Liste des candidatures
+- `POST /api/candidatures/` : Créer une candidature
+- `GET /api/candidatures/{id}` : Détails d’une candidature
+- `PUT /api/candidatures/{id}` : Modifier complètement une candidature
+- `PATCH /api/candidatures/{id}` : Modifier partiellement une candidature
+- `DELETE /api/candidatures/{id}` : Supprimer une candidature
 
-`/api/schema/swagger-ui/` -> `http://127.0.0.1:8000/api/schema/swagger-ui/`
-    - GET : Affiche la doc Swagger
+### 🔹 Documentation
+
+- `GET /api/schema/` : Schéma OpenAPI
+- `GET /api/schema/swagger-ui/` : Interface Swagger
