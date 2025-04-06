@@ -2,3 +2,4 @@ django
 djangorestframework
 environs
 drf-spectacular
+psycopg2-binary
